@@ -1,0 +1,32 @@
+USE sql10752499;
+
+CREATE TABLE USUARIOS
+(
+	usr_ID VARCHAR(20) NOT NULL,
+    usr_Password VARCHAR(30) NOT NULL,
+    
+    PRIMARY KEY (usr_ID)
+);
+
+CREATE TABLE CATEGORIAS
+(
+	cat_ID INT NOT NULL AUTO_INCREMENT,
+    cat_Name VARCHAR(20) NOT NULL,
+    cat_IdUsr VARCHAR(20) NOT NULL,
+    
+    PRIMARY KEY (cat_ID, cat_Name),
+    FOREIGN KEY (cat_IDUsr) REFERENCES USUARIOS(usr_ID)
+);
+
+CREATE TABLE TAREAS
+(
+	tr_ID INT NOT NULL AUTO_INCREMENT,
+    tr_Titulo VARCHAR(255) NOT NULL,
+    tr_Completado BOOLEAN NOT NULL DEFAULT false,
+	tr_FechaInicio DATE NOT NULL,
+    tr_FechaFin DATE,
+    tr_CatID INT NOT NULL,
+    
+    PRIMARY KEY (tr_ID),
+    FOREIGN KEY (tr_CatID) REFERENCES CATEGORIAS(cat_ID)
+);
